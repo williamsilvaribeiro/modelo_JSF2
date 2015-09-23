@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+
+    <ui:define name="content">
+        <h:form acceptcharset="UTF-8" prependId="false">
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['vidro.label.titulo.consultar']}" />
+            </div>
+            <br />
+            <p:breadCrumb>  
+                <p:menuitem />
+                <p:menuitem value="#{msg['trilha.label.inicio']}" url="/paginas/acesso.xhtml" />
+            </p:breadCrumb>
+            <br />
+            <p:growl id="msg" showDetail="false" sticky="false" />
+            <p:panel id="pnlFiltro">
+            
+            	<h:panelGroup styleClass="formTable">
+            		
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['vidro.label.tipo.vidro']}" for="cbxTipoVidro" style="font-weight:bold;" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxTipoVidro" style="height: 25px" label="#{msg['vidro.label.tipo.vidro']}" value="#{manterVidroMB.vidroConsulta.tipoVidro.id}">
+	                    	<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{manterVidroMB.listaTipoVidro}" var="tipoVidro" itemLabel="#{tipoVidro.descricao}" itemValue="#{tipoVidro.id}" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['vidro.label.cor.vidro']}" for="cbxCorVidro" style="font-weight:bold;" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxCorVidro" style="height: 25px" label="#{msg['vidro.label.cor.vidro']}" value="#{manterVidroMB.vidroConsulta.corVidro.id}">
+	                    	<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{manterVidroMB.listaCorVidro}" var="corVidro" itemLabel="#{corVidro.descricao}" itemValue="#{corVidro.id}" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<p:commandButton title="#{msg['label.button.consultar']}" id="btnConsultar" ajax="false" icon="ui-icon-search" style="margin-top: 18px;" action="#{manterVidroMB.consultar}" />
+                        <p:commandButton title="#{msg['label.button.adicionar']}" id="btnAdicionar" ajax="false" icon="ui-icon-plus" style="margin-left: 15px;" action="#{manterVidroMB.iniciarNovoCadastro}"  />
+	                </h:panelGroup>
+            		
+            	</h:panelGroup>
+                
+            </p:panel>
+            <br />
+            <p:dataTable id="gridVidro" var="item" value="#{manterVidroMB.listaVidro}" editable="true" emptyMessage="Nenhum registro encontrado." paginator="true" paginatorPosition="bottom" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                <p:column headerText="#{msg['vidro.label.tipo.vidro']}">  
+                    <h:outputText value="#{item.tipoVidro.descricao}"/>  
+                </p:column>
+                <p:column headerText="#{msg['vidro.label.tipo.vidro']}">  
+                    <h:outputText value="#{item.corVidro.descricao}"/>  
+                </p:column>
+                <p:column headerText="#{msg['vidro.label.milimetro']}">  
+                    <h:outputText value="#{item.milimetro}"/>  
+                </p:column>
+                <p:column headerText="#{msg['vidro.label.valor.unitario']}">
+                	<h:outputText value="R$ " />  
+                    <h:outputText value="#{item.valorUnitario}">
+                    	<f:convertNumber locale="pt" maxFractionDigits="2" minFractionDigits="2" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['label.button.editar']}" style="width:6%">
+                    <p:commandButton title="#{msg['label.button.editar']}" ajax="false" icon="ui-icon-pencil" style="background-color: transparent; border: 0px;" action="#{manterVidroMB.alterar(item)}" />
+                </p:column>
+                <p:column headerText="#{msg['label.button.deletar']}" style="width:7%">
+                    <p:commandButton title="#{msg['label.button.deletar']}" ajax="false" icon="ui-icon-trash" style="background-color: transparent; border: 0px;" action="#{manterVidroMB.excluir(item)}" onclick="return confirm('Deseja realmente deletar este registro?')" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

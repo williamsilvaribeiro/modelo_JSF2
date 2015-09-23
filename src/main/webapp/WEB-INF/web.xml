@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0" metadata-complete="true">
+    
+    <!-- DEFINICAO DO ESTAGIO DO PROJETO -->
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    
+    <!-- DEFINICAO DO TEMA UTILIZADO DO PRIMEFACES -->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>aristo</param-value>
+    </context-param>
+    
+    <!-- DEFINICAO DO COMINHO DOS ARQUIVOS DE CONFIGURACAO DO CONTEXTO DO SPRING -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+    
+    <!-- LISTENER PARA SUBIR O CONTEXTO DO SPRING -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    <!-- LISTENER PARA EXPOR O REQUEST PARA MANIPULACAO DO SPRING -->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+    
+    <!-- DEFINICAO DO USO DO SERVET JSF NO CONTAINER -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <!-- MAPEAMENTO DA SERVLET E DA URL PARA PROCESSAMENTO DO HTTP REQUEST -->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    
+    <!-- DEFINICAO DO TEMPO DE INATIVIDADE DE UMA SESSAO -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+    <!-- DEFINICAO DA PAGINA INICIAL -->
+    <welcome-file-list>
+        <welcome-file>paginas/seguranca/login.xhtml</welcome-file>
+    </welcome-file-list>
+    
+    <!-- DEFINICAO DO RECURSO DE FONTE DE DADOS -->
+    <resource-ref>
+        <res-ref-name>jdbc/reikiDB</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/paginas/seguranca/login.xhtml</location>
+	</error-page>
+        
+</web-app>

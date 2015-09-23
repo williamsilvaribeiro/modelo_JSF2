@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
+        <title>Reiki</title>
+        <link href="#{request.contextPath}/css/estilo-paginas.css" rel="stylesheet" type="text/css" />
+        <script src="#{request.contextPath}/js/mascaras.js" type="text/javascript" />
+    </h:head>
+
+    <h:body>
+        <div id="container">
+            <div id="header">
+                <div id="logo">
+                    <img src="#{request.contextPath}/images/reiki_fonte_branca.png" width="150" />
+                </div>
+                <h:form>
+                    <div id="dadosSistema">
+                        <h:outputLabel id="lblUsuario" style="color: white;" value="Usuário: #{sessionBean.usuario.login}" />
+                        <p:spacer width="7px;" />
+                        <h:outputLabel id="lblBarra" style="color: white;" value="|" />
+                        <p:spacer width="7px;" />
+                        <p:commandLink id="linkSair" style="color: white;" value="Sair" action="#{efetuarLoginMB.logout}" />
+                    </div>
+                </h:form>
+            </div>
+            <div id="content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+        <div id="footer">
+            <p class="copy">&#169; Copyright 2014 - Todos os direitos reservados à Reiki.</p>
+        </div>
+    </h:body>
+
+</html>

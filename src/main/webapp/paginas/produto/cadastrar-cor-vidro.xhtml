@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+
+    <ui:define name="content">
+        <h:form acceptcharset="UTF-8" prependId="false">
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['cor.vidro.label.titulo.cadastrar']}" />
+            </div>
+            <br />
+            <p:breadCrumb>  
+                <p:menuitem />
+                <p:menuitem value="#{msg['trilha.label.inicio']}" url="/paginas/acesso.xhtml" />
+            </p:breadCrumb>
+            <br />
+            <p:growl id="msg" showDetail="false" sticky="false" globalOnly="true" autoUpdate="true" />
+            <p:panel id="pnlCadastro">
+                <h:panelGrid columns="1" style="text-align: left">
+                    <h:column>
+                        <h:outputLabel value="#{msg['cor.vidro.label.descricao']}" for="txtDescricao" style="font-weight:bold"/>
+                        <h:outputLabel value="*" for="txtDescricao" style="color: red" />
+                    </h:column>
+                    <h:column>
+                        <p:inputText id="txtDescricao" required="true" label="#{msg['cor.vidro.label.descricao']}" style="width: 400px;" maxlength="50" value="#{manterCorVidroMB.corVidroCadastro.descricao}" />
+                    </h:column>
+                    <h:column>
+                        <p:message for="txtDescricao" />
+                    </h:column>
+                    <h:column />
+                </h:panelGrid>
+            </p:panel>
+            <h:panelGroup style="display: block; margin-top: 15px; text-align: center;">
+                <p:commandButton id="btnOk" title="#{msg['label.button.salvar']}" value="#{msg['label.button.salvar']}" ajax="false" icon="ui-icon-check" action="#{manterCorVidroMB.cadastrar}" update="pnlCadastro"/>
+                <p:commandButton id="btnCancelar" title="#{msg['label.button.voltar']}" value="#{msg['label.button.voltar']}" ajax="false" icon="ui-icon-arrowreturnthick-1-w" action="#{manterCorVidroMB.voltar}" immediate="true" />
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

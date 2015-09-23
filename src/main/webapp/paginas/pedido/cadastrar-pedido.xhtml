@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+                
+    <ui:define name="content">
+        
+        <h:form id="pedidoForm" acceptcharset="UTF-8" prependId="false">
+            
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['pedido.label.titulo.cadastrar']}" />
+            </div>
+            
+            <br />
+            
+            <p:breadCrumb>  
+                <p:menuitem />
+                <p:menuitem value="#{msg['trilha.label.inicio']}" url="/paginas/acesso.xhtml" />
+            </p:breadCrumb>
+            
+            <br />
+            
+            <p:growl id="msg" showDetail="false" sticky="false" globalOnly="false" autoUpdate="true" />
+            
+            <p:panel id="pnlCadastro">
+            
+            	<h:panelGroup id="pnlDadosPrincipais" styleClass="formTable">
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['pedido.label.numero']}" for="txtNumero" style="font-weight:bold"/>
+	                 		<h:outputLabel value="*" for="txtNumero" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtNumero" label="#{msg['pedido.label.numero']}" style="width: 60px;" maxlength="50" value="#{manterPedidoMB.pedidoCadastro.numero}" required="true" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['pedido.label.data.emissao']}" for="txtDataEmissao" style="font-weight:bold"/>
+	                 		<h:outputLabel value="*" for="txtDataEmissao" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtDataEmissao" label="#{msg['pedido.label.data.emissao']}" style="width: 110px;" maxlength="10" value="#{manterPedidoMB.pedidoCadastro.dataEmissao}" required="true" onkeypress="mascara(this, mascaraData)" >
+	                   		<f:convertDateTime pattern="dd/MM/yyyy" />
+	                   	</p:inputText>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['pedido.label.vendedor']}" for="cbxVendedor" style="font-weight:bold"/>
+	                 		<h:outputLabel value="*" for="cbxVendedor" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:selectOneMenu id="cbxVendedor" style="height: 25px" label="#{msg['pedido.label.vendedor']}" required="true" value="#{manterPedidoMB.pedidoCadastro.vendedor.id}">
+							<f:selectItems value="#{manterPedidoMB.listaVendedor}" var="vendedor" itemLabel="#{vendedor.nome}" itemValue="#{vendedor.id}" />
+							<p:ajax event="change" process="@this" listener="#{manterPedidoMB.atualizarPercentualComissaoVenda()}" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+                </h:panelGroup>
+                
+                <p:panel id="pnlDadosCliente" style="margin-top: 20px;">
+                	
+                	<h:outputLabel value="#{msg['pedido.label.cliente']}" style="position: absolute; margin-top: -22px; background-color: white; width: 60px; text-align: center;" />
+                	
+                	<h:panelGroup id="pnlPesquisaCliente" styleClass="formTable" style="margin-top: 5px; margin-bottom: 15px;">
+                		<p:commandButton title="#{msg['label.button.consultar']}" ajax="false" icon="ui-icon-search" action="#{manterPedidoMB.consultarCliente}" value="Pesquisar" immediate="true" />
+                		<span />
+                        <p:commandButton title="#{msg['label.button.limpar']}" ajax="false" icon="ui-icon-radio-on" action="#{manterPedidoMB.limparCliente}" value="Limpar" immediate="true" update="pnlDadosCliente" />
+                	</h:panelGroup>
+                	
+                	<h:panelGroup id="pnlCliente" styleClass="formTable">
+	                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.nome']}" for="txtNome" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtNome" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtNome" required="true" label="#{msg['pedido.label.cliente.nome']}" style="width: 350px;" maxlength="50" value="#{manterPedidoMB.pedidoCadastro.cliente.nome}" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                    	<h:outputLabel value="#{msg['pedido.label.cliente.tipo.pessoa']}" for="cbxTipoPessoa" style="font-weight:bold;" />
+		                    	<h:outputLabel value="*" for="cbxTipoPessoa" style="color: red" />
+		                	</h:panelGroup>
+		                    <p:selectOneMenu id="cbxTipoPessoa" style="width: 140px; height: 25px" label="#{msg['pedido.label.cliente.tipo.pessoa']}" required="true" value="#{manterPedidoMB.pedidoCadastro.cliente.tipoPessoa}">
+								<f:selectItem itemLabel="Pessoa Física" itemValue="PF" />
+								<f:selectItem itemLabel="Pessoa Jurídica" itemValue="PJ" />
+								<p:ajax update="pnlCliente" event="change" process="cbxTipoPessoa" />
+							</p:selectOneMenu>
+		                </h:panelGroup>
+		                
+		                <h:panelGroup id="pnlCpf" styleClass="formCell" rendered="#{manterPedidoMB.pedidoCadastro.cliente.tipoPessoa eq 'PF'}" >
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.cpf']}" for="txtCpf" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtCpf" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtCpf" required="true" label="#{msg['pedido.label.cliente.cpf']}" style="width: 140px; margin-bottom: 5px; display: inline;" maxlength="14" value="#{manterPedidoMB.pedidoCadastro.cliente.cpf}" onkeypress="mascara(this, mascaraCpf)" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup id="pnlRg" styleClass="formCell" rendered="#{manterPedidoMB.pedidoCadastro.cliente.tipoPessoa eq 'PF'}" >
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.rg']}" for="txtRg" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtRg" label="#{msg['pedido.label.cliente.rg']}" style="width: 140px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterPedidoMB.pedidoCadastro.cliente.rg}" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup id="pnlCnpj" styleClass="formCell" rendered="#{manterPedidoMB.pedidoCadastro.cliente.tipoPessoa eq 'PJ'}" >
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.cnpj']}" for="txtCnpj" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtCnpj" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtCnpj" required="true" label="#{msg['pedido.label.cliente.cnpj']}" style="width: 160px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterPedidoMB.pedidoCadastro.cliente.cnpj}" onkeypress="mascara(this, mascaraCnpj)" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup id="pnlInscricaoEstadual" styleClass="formCell" rendered="#{manterPedidoMB.pedidoCadastro.cliente.tipoPessoa eq 'PJ'}">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.inscricao.estadual']}" for="txtInscricaoEstadual" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtInscricaoEstadual" label="#{msg['pedido.label.cliente.inscricao.estadual']}" style="width: 160px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterPedidoMB.pedidoCadastro.cliente.inscricaoEstadual}" />
+		                </h:panelGroup>
+		                
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlContatoCliente" style="margin-top: 10px;" styleClass="formTable">
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.telefone.fixo']}" for="txtTelefoneFixo" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtTelefoneFixo" label="#{msg['pedido.label.cliente.telefone.fixo']}" style="width: 160px;" maxlength="14" value="#{manterPedidoMB.pedidoCadastro.cliente.telefoneFixo}" onkeypress="mascara(this, mascaraTelefone)" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.telefone.celular']}" for="txtTelefoneCelular" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtTelefoneCelular" label="#{msg['pedido.label.cliente.telefone.celular']}" style="width: 160px;" maxlength="14" value="#{manterPedidoMB.pedidoCadastro.cliente.telefoneCelular}" onkeypress="mascara(this, mascaraTelefone)" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.email']}" for="txtEmail" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtEmail" label="#{msg['pedido.label.cliente.email']}" style="width: 350px;" maxlength="50" value="#{manterPedidoMB.pedidoCadastro.cliente.email}" />
+		                </h:panelGroup>
+		                
+	            	</h:panelGroup>
+	            	
+	            	<h:panelGroup id="pnlObservacaoCliente" style="margin-top: 10px; width: 100%;" styleClass="formTable">
+            	
+	            		<h:panelGroup style="width: 100%;" styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.cliente.observacao']}" for="txtObservacao" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                	<p:inputTextarea id="txtObservacao" label="#{msg['pedido.label.cliente.observacao']}" rows="3" cols="126" value="#{manterPedidoMB.pedidoCadastro.cliente.observacao}" maxlength="200" />
+		                </h:panelGroup>
+	            		
+	            	</h:panelGroup>
+                	
+                </p:panel>
+                
+                <p:panel style="margin-top: 20px;">
+                
+                	<h:outputLabel value="#{msg['pedido.label.endereco']}" style="position: absolute; margin-top: -22px; background-color: white; width: 75px; text-align: center;" />
+                	
+                	<h:panelGroup id="pnlEnderecoObra" style="margin-top: 10px; width: 100%;" styleClass="formTable">
+                	
+                		<h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.endereco.obra']}" for="txtEndereco" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtEndereco" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtEndereco" required="true" label="#{msg['pedido.label.endereco.obra']}" style="width: 500px;" maxlength="70" value="#{manterPedidoMB.pedidoCadastro.enderecoObra.endereco}" />
+		                </h:panelGroup>
+                	
+                	</h:panelGroup>
+                	
+                	<h:panelGroup id="pnlComplementoEndereco" style="margin-top: 10px; width: 100%;" styleClass="formTable">
+                	
+                		<h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                    	<h:outputLabel value="#{msg['pedido.label.endereco.uf']}" for="cbxUf" style="font-weight:bold;" />
+		                    	<h:outputLabel value="*" for="cbxUf" style="color: red" />
+		                	</h:panelGroup>
+		                    <p:selectOneMenu id="cbxUf" style="width: 60px; height: 25px" label="#{msg['pedido.label.endereco.uf']}" required="true" value="#{manterPedidoMB.pedidoCadastro.enderecoObra.uf.id}">
+								<f:selectItems value="#{manterPedidoMB.listaUf}" var="uf" itemLabel="#{uf.sigla}" itemValue="#{uf.id}" />
+							</p:selectOneMenu>
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.endereco.cidade']}" for="txtCidade" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtCidade" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtCidade" required="true" label="#{msg['pedido.label.endereco.cidade']}" style="width: 200px;" maxlength="30" value="#{manterPedidoMB.pedidoCadastro.enderecoObra.cidade}" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.endereco.bairro']}" for="txtBairro" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtBairro" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtBairro" required="true" label="#{msg['pedido.label.endereco.bairro']}" style="width: 200px;" maxlength="30" value="#{manterPedidoMB.pedidoCadastro.enderecoObra.bairro}" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.endereco.cep']}" for="txtCep" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtCep" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtCep" required="true" label="#{msg['pedido.label.endereco.cep']}" style="width: 100px;" maxlength="9" value="#{manterPedidoMB.pedidoCadastro.enderecoObra.cep}"  onkeypress="mascara(this, mascaraCep)" />
+		                </h:panelGroup>
+                	
+                	</h:panelGroup>
+                
+                </p:panel>
+                
+                <p:panel style="margin-top: 20px;">
+                
+                	<h:outputLabel value="#{msg['pedido.label.indicacao']}" style="position: absolute; margin-top: -22px; background-color: white; width: 75px; text-align: center;" />
+                	
+                	<h:panelGroup id="pnlIndicacao" style="margin-top: 10px; width: 100%;" styleClass="formTable">
+                	
+                		<h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.houve.indicacao']}" for="rbtHouveIndicacao" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="rbtHouveIndicacao" style="color: red; " />
+		                	</h:panelGroup>
+		                	<p:selectOneRadio id="rbtHouveIndicacao" value="#{manterPedidoMB.pedidoCadastro.indicacao}">
+					            <f:selectItem itemLabel="Sim" itemValue="S" />
+					            <f:selectItem itemLabel="Não" itemValue="N" />
+					            <p:ajax update="pedidoForm:pnlIndicacao" event="change" process="rbtHouveIndicacao" />
+					        </p:selectOneRadio>
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.indicacao.nome']}" for="txtNomeIndicacao" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtNomeIndicacao" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtNomeIndicacao" required="true" label="#{msg['pedido.label.indicacao.nome']}" style="width: 350px;" maxlength="70" value="#{manterPedidoMB.pedidoCadastro.nomeIndicacao}" disabled="#{manterPedidoMB.pedidoCadastro.indicacao eq 'N'}" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.indicacao.percentual.comissao']}" for="txtPercentualComissaoIndicacao" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtPercentualComissaoIndicacao" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtPercentualComissaoIndicacao" required="true" label="#{msg['funcionario.label.percentual.comissao']}" style="width: 100px; text-align: right;" maxlength="5" value="#{manterPedidoMB.pedidoCadastro.percentualComissaoIndicacao}" onkeyup="mascara(this, mascaraValorReais)" disabled="#{manterPedidoMB.pedidoCadastro.indicacao eq 'N'}" >
+		                   		<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+		                   	</p:inputText>
+		                </h:panelGroup>
+		                
+	                </h:panelGroup>
+                	
+               	</p:panel>
+                
+                <p:panel style="margin-top: 20px;">
+                
+                	<h:outputLabel value="#{msg['pedido.label.item']}" style="position: absolute; margin-top: -22px; background-color: white; width: 75px; text-align: center;" />
+
+					<p:dataTable id="tblItemPedido" var="item" value="#{manterPedidoMB.pedidoCadastro.listaItemPedido}" editable="true" editMode="cell" widgetVar="cellItem">
+
+						<p:column headerText="#{msg['pedido.label.item.numero']}">
+							<h:outputText value="#{item.numeroItem}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.qtde.dias']}">
+							<h:outputText value="#{item.numeroDiasEntrega}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.grupo']}">
+							<h:outputText value="#{item.grupo}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.ambiente']}">
+							<h:outputText value="#{item.ambiente}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.qtde']}">
+							<h:outputText value="#{item.quantidade}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.vidro']}">
+							<h:outputText value="#{item.descricaoVidro}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.comprimento']}">
+							<h:outputText value="#{item.comprimento}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.altura']}">
+							<h:outputText value="#{item.altura}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.acabamento']}">
+							<h:outputText value="#{item.descricaoAcabamento}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.valor.total']}">
+							<h:outputText value="#{item.valorTotalItem}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.item.acoes']}"  style="text-align: center;">
+							<p:commandButton title="#{msg['label.button.editar']}" icon="ui-icon-pencil" style="background-color: transparent; border: 0px;" action="#{manterPedidoMB.editarItemPedido(item)}" immediate="true" update=":itemPedidoForm" oncomplete="PF('modalItemPedido').show();" />
+							<span />
+							<p:commandButton title="#{msg['label.button.deletar']}" icon="ui-icon-trash" style="background-color: transparent; border: 0px;" action="#{manterPedidoMB.excluirItemPedido(item)}" immediate="true" onclick="return confirm('Deseja realmente deletar este registro?')" />
+						</p:column>
+						
+					</p:dataTable>
+					
+					<h:panelGroup style="display: block; margin-top: 15px;">
+		                <p:commandButton id="btnAdicionarItem" title="#{msg['label.button.adicionar']}" value="#{msg['label.button.adicionar']}" icon="ui-icon-plus" immediate="true" action="#{manterPedidoMB.adicionarItemPedido}" oncomplete="PF('modalItemPedido').show();" />
+		            </h:panelGroup>
+
+				</p:panel>
+				
+				<p:panel style="margin-top: 20px;">
+				
+					<h:outputLabel value="#{msg['pedido.label.pagamento']}" style="position: absolute; margin-top: -22px; background-color: white; width: 95px; text-align: center;" />
+					
+					<p:dataTable id="tblPagamento" var="pgto" value="#{manterPedidoMB.pedidoCadastro.listaPagamentoPedido}" editable="true" editMode="cell" widgetVar="cellItem">
+
+						<p:column headerText="#{msg['pedido.label.pagamento.numero']}">
+							<h:outputText value="#{pgto.numeroParcela}" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.pagamento.tipo']}">
+						
+							<p:selectOneMenu id="cbxTipoPagamento" style="width: 140px; height: 25px" label="#{msg['pedido.label.pagamento.tipo']}" required="true" value="#{pgto.tipoPagamento.id}">
+								<f:selectItems value="#{manterPedidoMB.listaTipoPagamento}" var="tipoPagamento" itemLabel="#{tipoPagamento.descricao}" itemValue="#{tipoPagamento.id}" />
+							</p:selectOneMenu>
+						
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.pagamento.data.credito']}">
+						
+							<h:inputText id="txtDataCredito" value="#{pgto.dataCredito}" maxlength="10" onkeypress="mascara(this, mascaraData)" style="width: 80px;">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:inputText>
+							
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.pagamento.valor.credito']}">
+							
+							<h:outputText value="R$ " />
+							
+							<h:inputText id="txtValorCredito" value="#{pgto.valorCredito}" maxlength="9" onkeypress="mascara(this, mascaraValorReais)" style="width: 80px;">
+								<f:convertNumber locale="pt" maxFractionDigits="2" minFractionDigits="2" />
+							</h:inputText>
+							
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.pagamento.numero.cheque']}">
+							<h:inputText id="txtNumeroCheque" value="#{pgto.numeroCheque}" maxlength="20" style="width: 170px;" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.pagamento.bandeira.cartao']}">
+							<h:inputText id="txtBandeiraCartao" value="#{pgto.bandeiraCartao}" maxlength="20" style="width: 100px;" />
+						</p:column>
+						
+						<p:column headerText="#{msg['pedido.label.pagamento.acoes']}" style="text-align: center;">
+							<p:commandButton title="#{msg['label.button.deletar']}" icon="ui-icon-trash" style="background-color: transparent; border: 0px;" action="#{manterPedidoMB.excluirPagamento(pgto)}" immediate="true" onclick="return confirm('Deseja realmente deletar este registro?')" />
+						</p:column>
+						
+					</p:dataTable>
+					
+					<h:panelGroup style="display: block; margin-top: 15px;">
+		                <p:commandButton id="btnAdicionarPagamento" title="#{msg['label.button.adicionar']}" value="#{msg['label.button.adicionar']}" icon="ui-icon-plus" immediate="true" action="#{manterPedidoMB.adicionarPagamento}" update="tblPagamento" />
+		            </h:panelGroup>
+					
+				</p:panel>
+				
+				<p:panel style="margin-top: 20px;">
+                
+                	<h:outputLabel value="#{msg['pedido.label.observacao']}" style="position: absolute; margin-top: -22px; background-color: white; width: 95px; text-align: center;" />
+                	
+                	<h:panelGroup id="pnlObservacaoPedido" style="margin-top: 10px; width: 100%;" styleClass="formTable">
+                	
+                		<h:panelGroup style="width: 100%;" styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.observacao']}" for="txtObservacaoPedido" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                	<p:inputTextarea id="txtObservacaoPedido" label="#{msg['pedido.label.observacao']}" rows="3" cols="126" value="#{manterPedidoMB.pedidoCadastro.observacao}" maxlength="200" />
+		                </h:panelGroup>
+                		
+               		</h:panelGroup>
+               		
+            	</p:panel>
+				
+			</p:panel>
+            
+            <h:panelGroup style="display: block; margin-top: 15px; text-align: center;">
+                <p:commandButton id="btnSalvar" title="#{msg['label.button.salvar']}" value="#{msg['label.button.salvar']}" ajax="false" icon="ui-icon-check" action="#{manterPedidoMB.salvar}" update="pnlCadastro"/>
+                <p:commandButton id="btnCancelar" title="#{msg['label.button.voltar']}" value="#{msg['label.button.voltar']}" ajax="false" icon="ui-icon-arrowreturnthick-1-w" action="#{manterPedidoMB.voltar}" immediate="true"  />
+            </h:panelGroup>
+            
+        </h:form>
+        
+        <h:form id="itemPedidoForm" acceptcharset="UTF-8" prependId="false">
+        	
+        	<p:dialog header="Adicionar Novo Item" widgetVar="modalItemPedido" modal="true" resizable="false" >
+        		
+        		<p:panel style="margin-top: 10px;">
+				
+					<h:panelGroup id="pnlDadosItemPedido" styleClass="formTable">
+                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['pedido.label.item.numero']}" for="txtNumeroItem" style="font-weight:bold"/>
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtNumeroItem" readonly="true" label="#{msg['pedido.label.item.numero']}" style="width: 80px;" value="#{manterPedidoMB.pedidoCadastro.numero}" />
+		                </h:panelGroup>
+		                
+	                </h:panelGroup>
+		                
+				</p:panel>
+				
+				<h:panelGroup style="display: block; margin-top: 10px; margin-bottom: 5px; text-align: center;">
+					<p:commandButton id="btnConcluirCadastroItem" title="#{msg['label.button.concluir']}" value="#{msg['label.button.concluir']}" icon="ui-icon-check" action="#{manterPedidoMB.concluirCadastroItemPedido}" update=":pedidoForm:tblItemPedido" />
+				</h:panelGroup>
+        		
+        	</p:dialog>
+        	
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

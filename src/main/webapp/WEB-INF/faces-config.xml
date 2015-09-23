@@ -1,0 +1,259 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.1"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    <!--
+        JSF faz uso de Expression Language (EL) para determinar a qual classe você se refere quando ela é apontada na página xhtml. 
+        Fazendo uso de uma classe chamada ELResolver ele pega a String passada, a interpreta e faz a referência adequada. 
+        A classe SpringBeanFacesELResolver proporciona a integração entre os dois frameworks interceptando a requisição e passando-a 
+        para o contexto do Spring, o qual a manipula para prover as dependências requeridas pelos ManagedBeans, que em seguida a passa 
+        para o ELResolver do próprio JSF.
+    -->
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <message-bundle>messages</message-bundle>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+        </locale-config>
+        
+    </application>
+
+    <!-- DEFINICOES DAS REGRAS DE NAVEGACAO -->
+    
+    <!-- REGRA DE NAVEGACAO DO LOGIN -->
+    <navigation-rule>
+        <from-view-id>/paginas/seguranca/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>successo</from-outcome>
+            <to-view-id>/paginas/acesso.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRAS DE NAVEGACAO DO COMPONENTE TRILHA -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>visualizarInicio</from-outcome>
+            <to-view-id>/paginas/acesso.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DA PAGINA INICIAL -->
+    <navigation-rule>
+        <from-view-id>/paginas/acesso.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarBanco</from-outcome>
+            <to-view-id>/paginas/banco/consultar-banco.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarFuncao</from-outcome>
+            <to-view-id>/paginas/funcao/consultar-funcao.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarFuncionario</from-outcome>
+            <to-view-id>/paginas/funcionario/consultar-funcionario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarCliente</from-outcome>
+            <to-view-id>/paginas/cliente/consultar-cliente.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarPedido</from-outcome>
+            <to-view-id>/paginas/pedido/consultar-pedido.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarCorVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-cor-vidro.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarTipoVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-tipo-vidro.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-vidro.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarPerfilVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-perfil-vidro.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarAcessorio</from-outcome>
+            <to-view-id>/paginas/produto/consultar-acessorio.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER BANCO -->
+    <navigation-rule>
+        <from-view-id>/paginas/banco/consultar-banco.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarBanco</from-outcome>
+            <to-view-id>/paginas/banco/cadastrar-banco.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/banco/cadastrar-banco.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarBanco</from-outcome>
+            <to-view-id>/paginas/banco/consultar-banco.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER FUNCAO -->
+    <navigation-rule>
+        <from-view-id>/paginas/funcao/consultar-funcao.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarFuncao</from-outcome>
+            <to-view-id>/paginas/funcao/cadastrar-funcao.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/funcao/cadastrar-funcao.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarFuncao</from-outcome>
+            <to-view-id>/paginas/funcao/consultar-funcao.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER FUNCIONARIO -->
+    <navigation-rule>
+        <from-view-id>/paginas/funcionario/consultar-funcionario.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarFuncionario</from-outcome>
+            <to-view-id>/paginas/funcionario/cadastrar-funcionario.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/funcionario/cadastrar-funcionario.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarFuncionario</from-outcome>
+            <to-view-id>/paginas/funcionario/consultar-funcionario.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER CLIENTE -->
+    <navigation-rule>
+        <from-view-id>/paginas/cliente/consultar-cliente.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarCliente</from-outcome>
+            <to-view-id>/paginas/cliente/cadastrar-cliente.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cadastrarPedido</from-outcome>
+            <to-view-id>/paginas/pedido/cadastrar-pedido.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/cliente/cadastrar-cliente.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarCliente</from-outcome>
+            <to-view-id>/paginas/cliente/consultar-cliente.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER PEDIDO -->
+    <navigation-rule>
+        <from-view-id>/paginas/pedido/consultar-pedido.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarPedido</from-outcome>
+            <to-view-id>/paginas/pedido/cadastrar-pedido.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/pedido/cadastrar-pedido.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarPedido</from-outcome>
+            <to-view-id>/paginas/pedido/consultar-pedido.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarCliente</from-outcome>
+            <to-view-id>/paginas/cliente/consultar-cliente.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER COR VIDRO -->
+    <navigation-rule>
+        <from-view-id>/paginas/produto/consultar-cor-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarCorVidro</from-outcome>
+            <to-view-id>/paginas/produto/cadastrar-cor-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/produto/cadastrar-cor-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarCorVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-cor-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER TIPO DE VIDRO -->
+    <navigation-rule>
+        <from-view-id>/paginas/produto/consultar-tipo-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarTipoVidro</from-outcome>
+            <to-view-id>/paginas/produto/cadastrar-tipo-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/produto/cadastrar-tipo-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarTipoVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-tipo-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER VIDRO -->
+    <navigation-rule>
+        <from-view-id>/paginas/produto/consultar-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarVidro</from-outcome>
+            <to-view-id>/paginas/produto/cadastrar-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/produto/cadastrar-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER PERFIL VIDRO -->
+    <navigation-rule>
+        <from-view-id>/paginas/produto/consultar-perfil-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarPerfilVidro</from-outcome>
+            <to-view-id>/paginas/produto/cadastrar-perfil-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/produto/cadastrar-perfil-vidro.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarPerfilVidro</from-outcome>
+            <to-view-id>/paginas/produto/consultar-perfil-vidro.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <!-- REGRA DE NAVEGACAO DE MANTER ACESSORIO -->
+    <navigation-rule>
+        <from-view-id>/paginas/produto/consultar-acessorio.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cadastrarAcessorio</from-outcome>
+            <to-view-id>/paginas/produto/cadastrar-acessorio.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/paginas/produto/cadastrar-acessorio.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarAcessorio</from-outcome>
+            <to-view-id>/paginas/produto/consultar-acessorio.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+</faces-config>

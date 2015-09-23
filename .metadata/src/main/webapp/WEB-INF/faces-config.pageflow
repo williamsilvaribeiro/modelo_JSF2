@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14005544323520" configfile="/reiki/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="paginas/seguranca/login.xhtml" x="122" y="1906" id="pf14005544666701" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14005544666702" path="/paginas/seguranca/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/acesso.xhtml" x="338" y="2098" id="pf14005544666703" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14005544666704 pf14005544666715 pf14005544666716 pf14005544666717 pf14005544666718 pf14041758614020 pf14041758614021 pf14041758614022 pf14065163711560 pf14065624286580" inlinks="pf14005544666702 pf14005544666719" path="/paginas/acesso.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="2290" id="pf140055446667110" outlinks="pf14005544666719" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/banco/consultar-banco.xhtml" x="554" y="178" id="pf140055446667111" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf140055446667112" inlinks="pf14005544666704 pf140055446667113" path="/paginas/banco/consultar-banco.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/funcao/consultar-funcao.xhtml" x="554" y="562" id="pf140055446667114" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf140055446667115" inlinks="pf14005544666715 pf140055446667116" path="/paginas/funcao/consultar-funcao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/funcionario/consultar-funcionario.xhtml" x="554" y="946" id="pf140055446667117" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" outlinks="pf140055446667118" inlinks="pf14005544666716 pf140055446667119" path="/paginas/funcionario/consultar-funcionario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/cliente/consultar-cliente.xhtml" x="554" y="1570" id="pf140055446667120" referenceLink="//@navigationRule.12/@navigationCase.1/@toViewId|" outlinks="pf140055446667121 pf14041758614023" inlinks="pf14005544666717 pf140055446667122 pf140411001463716" path="/paginas/cliente/consultar-cliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/banco/cadastrar-banco.xhtml" x="338" y="178" id="pf140055446667123" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf140055446667113" inlinks="pf140055446667112" path="/paginas/banco/cadastrar-banco.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/funcao/cadastrar-funcao.xhtml" x="338" y="562" id="pf140055446667124" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf140055446667116" inlinks="pf140055446667115" path="/paginas/funcao/cadastrar-funcao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/funcionario/cadastrar-funcionario.xhtml" x="338" y="946" id="pf140055446667125" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf140055446667119" inlinks="pf140055446667118" path="/paginas/funcionario/cadastrar-funcionario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/cliente/cadastrar-cliente.xhtml" x="338" y="1330" id="pf140055446667126" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf140055446667122" inlinks="pf140055446667121" path="/paginas/cliente/cadastrar-cliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/pedido/consultar-pedido.xhtml" x="554" y="1954" id="pf140055446667127" referenceLink="//@navigationRule.12/@navigationCase.0/@toViewId|" outlinks="pf140055453127328" inlinks="pf14005544666718 pf14040921360721" path="/paginas/pedido/consultar-pedido.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/pedido/cadastrar-pedido.xhtml" x="338" y="1714" id="pf140055453127329" referenceLink="//@navigationRule.12/@fromViewId|" outlinks="pf14040921360721 pf140411001463716" inlinks="pf140055453127328 pf14041758614023" path="/paginas/pedido/cadastrar-pedido.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/Pedido/consultar-pedido.xhtml" x="122" y="3154" id="pf140055453127331" referenceLink="//@navigationRule.12/@navigationCase.0/@toViewId|" path="/paginas/pedido/consultar-pedido.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/consultar-cor-vidro.xhtml" x="554" y="2482" id="pf14041758614024" referenceLink="//@navigationRule.14/@navigationCase.0/@toViewId|" outlinks="pf14041758614025" inlinks="pf14041758614020 pf14041758614026" path="/paginas/produto/consultar-cor-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/consultar-tipo-vidro.xhtml" x="554" y="2866" id="pf14041758614027" referenceLink="//@navigationRule.16/@navigationCase.0/@toViewId|" outlinks="pf14041758614028" inlinks="pf14041758614021 pf14041758614029" path="/paginas/produto/consultar-tipo-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/consultar-vidro.xhtml" x="554" y="3250" id="pf140417586140210" referenceLink="//@navigationRule.18/@navigationCase.0/@toViewId|" outlinks="pf140417586140211" inlinks="pf14041758614022 pf140417586140212" path="/paginas/produto/consultar-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/cadastrar-cor-vidro.xhtml" x="338" y="2482" id="pf140417586140213" referenceLink="//@navigationRule.14/@fromViewId|" outlinks="pf14041758614026" inlinks="pf14041758614025" path="/paginas/produto/cadastrar-cor-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/cadastrar-tipo-vidro.xhtml" x="338" y="2866" id="pf140417586140214" referenceLink="//@navigationRule.16/@fromViewId|" outlinks="pf14041758614029" inlinks="pf14041758614028" path="/paginas/produto/cadastrar-tipo-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/cadastrar-vidro.xhtml" x="338" y="3250" id="pf140417586140315" referenceLink="//@navigationRule.18/@fromViewId|" outlinks="pf140417586140212" inlinks="pf140417586140211" path="/paginas/produto/cadastrar-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/consultar-perfil-vidro.xhtml" x="554" y="3634" id="pf14065163711581" referenceLink="//@navigationRule.22/@navigationCase.0/@toViewId|" outlinks="pf14065624286591" inlinks="pf14065163711560 pf14065624286592" path="/paginas/produto/consultar-perfil-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/cadastrar-perfil-vidro.xhtml" x="338" y="3634" id="pf14065624286593" referenceLink="//@navigationRule.21/@navigationCase.0/@toViewId|" outlinks="pf14065624286592" inlinks="pf14065624286591" path="/paginas/produto/cadastrar-perfil-vidro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/consultar-acessorio.xhtml" id="pf14065624286594" referenceLink="//@navigationRule.22/@navigationCase.0/@toViewId|" outlinks="pf14065625539675" inlinks="pf14065624286580 pf14065625539676" path="/paginas/produto/consultar-acessorio.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/produto/cadastrar-acessorio.xhtml" id="pf14065625539677" referenceLink="//@navigationRule.22/@fromViewId|" outlinks="pf14065625539676" inlinks="pf14065625539675" path="/paginas/produto/cadastrar-acessorio.xhtml"/>
+  <links id="pf14005544666702" target="pf14005544666703" source="pf14005544666701" outcome="successo"/>
+  <links id="pf14005544666719" target="pf14005544666703" source="pf140055446667110" outcome="visualizarInicio"/>
+  <links id="pf14005544666704" target="pf140055446667111" source="pf14005544666703" outcome="consultarBanco"/>
+  <links id="pf14005544666715" target="pf140055446667114" source="pf14005544666703" outcome="consultarFuncao"/>
+  <links id="pf14005544666716" target="pf140055446667117" source="pf14005544666703" outcome="consultarFuncionario"/>
+  <links id="pf14005544666717" target="pf140055446667120" source="pf14005544666703" outcome="consultarCliente"/>
+  <links id="pf140055446667112" target="pf140055446667123" source="pf140055446667111" outcome="cadastrarBanco"/>
+  <links id="pf140055446667113" target="pf140055446667111" source="pf140055446667123" outcome="consultarBanco"/>
+  <links id="pf140055446667115" target="pf140055446667124" source="pf140055446667114" outcome="cadastrarFuncao"/>
+  <links id="pf140055446667116" target="pf140055446667114" source="pf140055446667124" outcome="consultarFuncao"/>
+  <links id="pf140055446667118" target="pf140055446667125" source="pf140055446667117" outcome="cadastrarFuncionario"/>
+  <links id="pf140055446667119" target="pf140055446667117" source="pf140055446667125" outcome="consultarFuncionario"/>
+  <links id="pf140055446667121" target="pf140055446667126" source="pf140055446667120" outcome="cadastrarCliente"/>
+  <links id="pf140055446667122" target="pf140055446667120" source="pf140055446667126" outcome="consultarCliente"/>
+  <links id="pf14005544666718" target="pf140055446667127" source="pf14005544666703" outcome="consultarPedido"/>
+  <links id="pf140055453127328" target="pf140055453127329" source="pf140055446667127" outcome="cadastrarPedido"/>
+  <links id="pf14040921360721" target="pf140055446667127" source="pf140055453127329" outcome="consultarPedido"/>
+  <links id="pf140411001463716" target="pf140055446667120" source="pf140055453127329" outcome="consultarCliente"/>
+  <links id="pf14041758614023" target="pf140055453127329" source="pf140055446667120" outcome="cadastrarPedido"/>
+  <links id="pf14041758614020" target="pf14041758614024" source="pf14005544666703" outcome="consultarCorVidro"/>
+  <links id="pf14041758614021" target="pf14041758614027" source="pf14005544666703" outcome="consultarTipoVidro"/>
+  <links id="pf14041758614022" target="pf140417586140210" source="pf14005544666703" outcome="consultarVidro"/>
+  <links id="pf14041758614025" target="pf140417586140213" source="pf14041758614024" outcome="cadastrarCorVidro"/>
+  <links id="pf14041758614026" target="pf14041758614024" source="pf140417586140213" outcome="consultarCorVidro"/>
+  <links id="pf14041758614028" target="pf140417586140214" source="pf14041758614027" outcome="cadastrarTipoVidro"/>
+  <links id="pf14041758614029" target="pf14041758614027" source="pf140417586140214" outcome="consultarTipoVidro"/>
+  <links id="pf140417586140211" target="pf140417586140315" source="pf140417586140210" outcome="cadastrarVidro"/>
+  <links id="pf140417586140212" target="pf140417586140210" source="pf140417586140315" outcome="consultarVidro"/>
+  <links id="pf14065163711560" target="pf14065163711581" source="pf14005544666703" outcome="consultarPerfilVidro"/>
+  <links id="pf14065624286591" target="pf14065624286593" source="pf14065163711581" outcome="cadastrarPerfilVidro"/>
+  <links id="pf14065624286592" target="pf14065163711581" source="pf14065624286593" outcome="consultarPerfilVidro"/>
+  <links id="pf14065624286580" target="pf14065624286594" source="pf14005544666703" outcome="consultarAcessorio"/>
+  <links id="pf14065625539675" target="pf14065625539677" source="pf14065624286594" outcome="cadastrarAcessorio"/>
+  <links id="pf14065625539676" target="pf14065624286594" source="pf14065625539677" outcome="consultarAcessorio"/>
+</pageflow:Pageflow>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/paginas/template/template-login.xhtml">
+    
+    <ui:define name="conteudo">
+        <br />
+        <br />
+        <br />
+        <img src="#{request.contextPath}/images/reiki_fonte_azul.png" width="272" height="65" />
+        <br />
+        <br />
+        <br />
+        <h:form id="form" acceptcharset="ISO-8859-1" prependId="false">
+            <p:panel id="pnlLogin" style="text-align: left; margin: auto; width: 320px;">
+                <h:panelGrid id="grid" columns="1" style="margin: auto; text-align: left;" cellspacing="6">
+                    <h:column>
+                        <h:outputLabel id="lblLogin" value="Login" for="txtLogin" style="font-weight: bold;" />
+                        <h:outputLabel value="*" for="txtLogin" style="color: red; " />
+                    </h:column>
+                    <h:column>
+                        <p:inputText id="txtLogin" label="Login" style="width: 267px" value="#{efetuarLoginMB.login}" required="true" />
+                    </h:column>
+                    <h:column>
+                        <p:message for="txtLogin" />
+                    </h:column>
+                    <h:column>
+                        <h:outputLabel id="lblSenha" value="Senha" for="txtSenha" style="font-weight: bold;" />
+                        <h:outputLabel value="*" for="txtLogin" style="color: red; " />
+                    </h:column>
+                    <h:column>
+                        <p:password id="txtSenha" label="Senha" style="width: 267px" value="#{efetuarLoginMB.senha}" required="true" />
+                    </h:column>
+                    <h:column>
+                        <p:message for="txtSenha" />
+                    </h:column>
+                </h:panelGrid>
+                <h:panelGrid columns="1" style="text-align: center; width: 100%; margin-top: 8px;">
+                    <h:column>
+                        <p:commandButton id="btnLogin" value="Entrar" action="#{efetuarLoginMB.efetuarLogin}" update="grid" />
+                    </h:column>
+                </h:panelGrid>
+            </p:panel>
+            <div id="messages" style="text-align: left; margin: auto; width: 328px">
+                <p:messages globalOnly="true" autoUpdate="true" closable="true" />
+            </div>
+        </h:form>
+        <br />
+        <br />
+        <br />
+    </ui:define>
+    
+</ui:composition>

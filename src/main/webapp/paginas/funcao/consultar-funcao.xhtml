@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+
+    <ui:define name="content">
+        <h:form acceptcharset="UTF-8" prependId="false">
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['funcao.label.titulo.consultar']}" />
+            </div>
+            <br />
+            <p:breadCrumb>  
+                <p:menuitem />
+                <p:menuitem value="#{msg['trilha.label.inicio']}" url="/paginas/acesso.xhtml" />
+            </p:breadCrumb>
+            <br />
+            <p:growl id="msg" showDetail="false" sticky="false" />
+            <p:panel id="pnlFiltro">
+                <h:panelGrid columns="2" style="text-align: left;">
+                    <h:column>
+                        <h:outputLabel value="#{msg['funcao.label.descricao']}" for="txtDescricao" style="font-weight:bold"/>
+                    </h:column>
+                    <h:column />
+                    <h:column>
+                        <p:inputText id="txtDescricao" style="width: 250px;" value="#{manterFuncaoMB.funcaoConsulta.descricao}" />
+                    </h:column>
+                    <h:column>
+                        <p:commandButton title="#{msg['label.button.consultar']}" id="btnConsultar" ajax="false" icon="ui-icon-search" style="margin-left: 15px;" action="#{manterFuncaoMB.consultar}" />
+                        <span />
+                        <p:commandButton title="#{msg['label.button.adicionar']}" id="btnAdicionar" ajax="false" icon="ui-icon-plus" style="margin-left: 15px;" action="#{manterFuncaoMB.iniciarNovoCadastro}"  />
+                    </h:column>
+                </h:panelGrid>
+            </p:panel>
+            <br />
+            <p:dataTable id="gridFuncao" var="item" value="#{manterFuncaoMB.listaFuncao}" editable="true" emptyMessage="Nenhum registro encontrado." paginator="true" paginatorPosition="bottom" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+                <p:column headerText="#{msg['funcao.label.descricao']}">  
+                    <h:outputText value="#{item.descricao}"/>  
+                </p:column>
+                <p:column headerText="#{msg['funcao.label.predefinido']}">
+                	<h:outputText value="Sim" rendered="#{item.statusPredefinido eq 'S'}" />
+                    <h:outputText value="Não" rendered="#{item.statusPredefinido eq 'N'}" />
+                </p:column>
+                <p:column headerText="#{msg['label.button.editar']}" style="width:6%">
+                    <p:commandButton title="#{msg['label.button.editar']}" ajax="false" icon="ui-icon-pencil" style="background-color: transparent; border: 0px;" action="#{manterFuncaoMB.alterar(item)}" rendered="#{manterFuncaoMB.renderizarBotoesEdicao(item)}" />
+                </p:column>
+                <p:column headerText="#{msg['label.button.deletar']}" style="width:7%">
+                    <p:commandButton title="#{msg['label.button.deletar']}" ajax="false" icon="ui-icon-trash" style="background-color: transparent; border: 0px;" action="#{manterFuncaoMB.excluir(item)}" onclick="return confirm('Deseja realmente deletar este registro?')" rendered="#{manterFuncaoMB.renderizarBotoesEdicao(item)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

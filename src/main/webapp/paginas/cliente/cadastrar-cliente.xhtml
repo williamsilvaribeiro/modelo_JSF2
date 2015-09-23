@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form acceptcharset="UTF-8" prependId="false">
+            
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['cliente.label.titulo.cadastrar']}" />
+            </div>
+            
+            <br />
+            
+            <p:breadCrumb>  
+                <p:menuitem />
+                <p:menuitem value="#{msg['trilha.label.inicio']}" url="/paginas/acesso.xhtml" />
+            </p:breadCrumb>
+            
+            <br />
+            
+            <p:growl id="msg" showDetail="false" sticky="false" globalOnly="false" autoUpdate="true" />
+            
+            <p:panel id="pnlCadastro">
+            
+            	<h:panelGroup id="pnlDadosPrincipais" styleClass="formTable">
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.nome']}" for="txtNome" style="font-weight:bold"/>
+	                    	<h:outputLabel value="*" for="txtNome" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtNome" required="true" label="#{msg['cliente.label.nome']}" style="width: 350px;" maxlength="50" value="#{manterClienteMB.clienteCadastro.nome}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['cliente.label.tipo.pessoa']}" for="cbxTipoPessoa" style="font-weight:bold;" />
+	                    	<h:outputLabel value="*" for="cbxTipoPessoa" style="color: red" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxTipoPessoa" style="width: 150px; height: 25px" label="#{msg['cliente.label.tipo.pessoa']}" required="true" value="#{manterClienteMB.clienteCadastro.tipoPessoa}">
+							<f:selectItem itemLabel="Pessoa Física" itemValue="PF" />
+							<f:selectItem itemLabel="Pessoa Jurídica" itemValue="PJ" />
+							<p:ajax update="pnlDadosPrincipais" event="change" process="cbxTipoPessoa" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlCpf" styleClass="formCell" rendered="#{manterClienteMB.clienteCadastro.tipoPessoa eq 'PF'}" >
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.cpf']}" for="txtCpf" style="font-weight:bold"/>
+	                    	<h:outputLabel value="*" for="txtCpf" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtCpf" required="true" label="#{msg['cliente.label.cpf']}" style="width: 140px; margin-bottom: 5px; display: inline;" maxlength="14" value="#{manterClienteMB.clienteCadastro.cpf}" onkeypress="mascara(this, mascaraCpf)" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlRg" styleClass="formCell" rendered="#{manterClienteMB.clienteCadastro.tipoPessoa eq 'PF'}" >
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.rg']}" for="txtRg" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtRg" label="#{msg['cliente.label.rg']}" style="width: 140px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterClienteMB.clienteCadastro.rg}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlCnpj" styleClass="formCell" rendered="#{manterClienteMB.clienteCadastro.tipoPessoa eq 'PJ'}" >
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.cnpj']}" for="txtCnpj" style="font-weight:bold"/>
+	                    	<h:outputLabel value="*" for="txtCnpj" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtCnpj" required="true" label="#{msg['cliente.label.cnpj']}" style="width: 160px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterClienteMB.clienteCadastro.cnpj}" onkeypress="mascara(this, mascaraCnpj)" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlInscricaoEstadual" styleClass="formCell" rendered="#{manterClienteMB.clienteCadastro.tipoPessoa eq 'PJ'}">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.inscricao.estadual']}" for="txtInscricaoEstadual" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtInscricaoEstadual" label="#{msg['cliente.label.inscricao.estadual']}" style="width: 160px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterClienteMB.clienteCadastro.inscricaoEstadual}" />
+	                </h:panelGroup>
+	                
+                </h:panelGroup>
+                
+                <h:panelGroup id="pnlContato" style="margin-top: 10px;" styleClass="formTable">
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.telefone.fixo']}" for="txtTelefoneFixo" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtTelefoneFixo" label="#{msg['cliente.label.telefone.fixo']}" style="width: 160px;" maxlength="20" value="#{manterClienteMB.clienteCadastro.telefoneFixo}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.telefone.celular']}" for="txtTelefoneCelular" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtTelefoneCelular" label="#{msg['cliente.label.telefone.celular']}" style="width: 160px;" maxlength="20" value="#{manterClienteMB.clienteCadastro.telefoneCelular}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.email']}" for="txtEmail" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtEmail" label="#{msg['cliente.label.email']}" style="width: 350px;" maxlength="50" value="#{manterClienteMB.clienteCadastro.email}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['cliente.label.ativo']}" for="cbxAtivo" style="font-weight:bold;" />
+	                    	<h:outputLabel value="*" for="cbxAtivo" style="color: red" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxAtivo" style="width: 60px; height: 25px" label="#{msg['cliente.label.ativo']}" required="true" value="#{manterClienteMB.clienteCadastro.registroAtivo}">
+							<f:selectItem itemLabel="Sim" itemValue="S" />
+							<f:selectItem itemLabel="Não" itemValue="N" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+            	</h:panelGroup>
+            	
+            	<h:panelGroup id="pnlObservacao" style="margin-top: 10px; width: 100%;" styleClass="formTable">
+            	
+            		<h:panelGroup style="width: 100%;" styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['cliente.label.observacao']}" for="txtObservacao" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                	<p:inputTextarea id="txtObservacao" label="#{msg['cliente.label.observacao']}" rows="3" cols="152" value="#{manterClienteMB.clienteCadastro.observacao}" maxlength="200" />
+	                </h:panelGroup>
+            		
+            	</h:panelGroup>
+           		
+            </p:panel>
+            
+            <h:panelGroup style="display: block; margin-top: 15px; text-align: center;">
+                <p:commandButton id="btnOk" title="#{msg['label.button.salvar']}" value="#{msg['label.button.salvar']}" ajax="false" icon="ui-icon-check" action="#{manterClienteMB.cadastrar}" update="pnlCadastro"/>
+                <p:commandButton id="btnCancelar" title="#{msg['label.button.voltar']}" value="#{msg['label.button.voltar']}" ajax="false" icon="ui-icon-arrowreturnthick-1-w" action="#{manterClienteMB.voltar}" immediate="true"  />
+            </h:panelGroup>
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

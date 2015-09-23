@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form acceptcharset="UTF-8" prependId="false">
+            
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['funcionario.label.titulo.cadastrar']}" />
+            </div>
+            
+            <br />
+            
+            <p:breadCrumb>  
+                <p:menuitem />
+                <p:menuitem value="#{msg['trilha.label.inicio']}" url="/paginas/acesso.xhtml" />
+            </p:breadCrumb>
+            
+            <br />
+            
+            <p:growl id="msg" showDetail="false" sticky="false" globalOnly="false" autoUpdate="true" />
+            
+            <p:panel id="pnlCadastro">
+            
+            	<h:panelGroup id="pnlDadosPrincipais" styleClass="formTable">
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['funcionario.label.nome']}" for="txtNome" style="font-weight:bold"/>
+	                    	<h:outputLabel value="*" for="txtNome" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtNome" required="true" label="#{msg['funcionario.label.nome']}" style="width: 415px;" maxlength="70" value="#{manterFuncionarioMB.funcionarioCadastro.nome}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['funcionario.label.funcao']}" for="cbxFuncao" style="font-weight:bold;" />
+	                    	<h:outputLabel value="*" for="cbxFuncao" style="color: red" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxFuncao" style="width: 250px; height: 25px" label="#{msg['funcionario.label.funcao']}" required="true" value="#{manterFuncionarioMB.funcionarioCadastro.funcao.id}">
+							<f:selectItems value="#{manterFuncionarioMB.listaFuncao}" var="funcao" itemLabel="#{funcao.descricao}" itemValue="#{funcao.id}" />
+							<p:ajax update="pnlTipoPessoa" event="change" process="cbxFuncao" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['funcionario.label.ativo']}" for="cbxAtivo" style="font-weight:bold;" />
+	                    	<h:outputLabel value="*" for="cbxAtivo" style="color: red" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxAtivo" style="width: 60px; height: 25px" label="#{msg['funcionario.label.ativo']}" required="true" value="#{manterFuncionarioMB.funcionarioCadastro.statusAtivo}">
+							<f:selectItem itemLabel="Sim" itemValue="S" />
+							<f:selectItem itemLabel="Não" itemValue="N" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+                </h:panelGroup>
+                
+                <h:panelGroup id="pnlTipoPessoa" style="margin-top: 10px;" styleClass="formTable">
+	                
+                	<h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['funcionario.label.tipo.pessoa']}" for="cbxTipoPessoa" style="font-weight:bold;" />
+	                    	<h:outputLabel value="*" for="cbxTipoPessoa" style="color: red" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxTipoPessoa" style="width: 150px; height: 25px" label="#{msg['funcionario.label.tipo.pessoa']}" required="true" value="#{manterFuncionarioMB.funcionarioCadastro.tipoPessoa}">
+							<f:selectItem itemLabel="Pessoa Física" itemValue="PF" />
+							<f:selectItem itemLabel="Pessoa Jurídica" itemValue="PJ" />
+							<p:ajax update="pnlTipoPessoa" event="change" process="cbxTipoPessoa" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlCpf" styleClass="formCell" rendered="#{manterFuncionarioMB.funcionarioCadastro.tipoPessoa eq 'PF'}" >
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['funcionario.label.cpf']}" for="txtCpf" style="font-weight:bold"/>
+	                    	<h:outputLabel value="*" for="txtCpf" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtCpf" required="true" label="#{msg['funcionario.label.cpf']}" style="width: 140px; margin-bottom: 5px; display: inline;" maxlength="14" value="#{manterFuncionarioMB.funcionarioCadastro.cpf}" onkeypress="mascara(this, mascaraCpf)" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlRg" styleClass="formCell" rendered="#{manterFuncionarioMB.funcionarioCadastro.tipoPessoa eq 'PF'}" >
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['funcionario.label.rg']}" for="txtRg" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtRg" label="#{msg['funcionario.label.rg']}" style="width: 140px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterFuncionarioMB.funcionarioCadastro.rg}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlCnpj" styleClass="formCell" rendered="#{manterFuncionarioMB.funcionarioCadastro.tipoPessoa eq 'PJ'}" >
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['funcionario.label.cnpj']}" for="txtCnpj" style="font-weight:bold"/>
+	                    	<h:outputLabel value="*" for="txtCnpj" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtCnpj" required="true" label="#{msg['funcionario.label.cnpj']}" style="width: 160px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterFuncionarioMB.funcionarioCadastro.cnpj}" onkeypress="mascara(this, mascaraCnpj)" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="pnlInscricaoEstadual" styleClass="formCell" rendered="#{manterFuncionarioMB.funcionarioCadastro.tipoPessoa eq 'PJ'}">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['funcionario.label.inscricao.estadual']}" for="txtInscricaoEstadual" style="font-weight:bold"/>
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtInscricaoEstadual" label="#{msg['funcionario.label.inscricao.estadual']}" style="width: 160px; margin-bottom: 5px; display: inline;" maxlength="20" value="#{manterFuncionarioMB.funcionarioCadastro.inscricaoEstadual}" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell" rendered="#{manterFuncionarioMB.funcionarioCadastro.funcao.id eq '4'}" >
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['funcionario.label.percentual.comissao']}" for="txtPercentualComissao" style="font-weight:bold"/>
+	                    	<h:outputLabel value="*" for="txtPercentualComissao" style="color: red; " />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtPercentualComissao" required="true" label="#{msg['funcionario.label.percentual.comissao']}" style="width: 100px; text-align: right;" maxlength="5" value="#{manterFuncionarioMB.funcionarioCadastro.percentualComissaoVenda}" onkeypress="mascara(this, mascaraValorReais)">
+	                   		<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+	                   	</p:inputText>
+	                </h:panelGroup>
+	                
+            	</h:panelGroup>
+           		
+           		<p:panel style="margin-top: 10px;">
+           		
+            		<h:panelGroup styleClass="formTable">
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                    	<h:outputLabel value="#{msg['funcionario.label.banco']}" for="cbxBanco" style="font-weight:bold;" />
+		                    	<h:outputLabel value="*" for="cbxBanco" style="color: red" />
+		                	</h:panelGroup>
+		                    <p:selectOneMenu id="cbxBanco" style="width: 250px; height: 25px" label="#{msg['funcionario.label.banco']}" required="true" value="#{manterFuncionarioMB.funcionarioCadastro.contaBancaria.banco.id}">
+								<f:selectItems value="#{manterFuncionarioMB.listaBanco}" var="banco" itemLabel="#{banco.nome} (#{banco.numero})" itemValue="#{banco.id}" />
+							</p:selectOneMenu>
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['funcionario.label.numero.agencia']}" for="txtNumeroAgencia" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtNumeroAgencia" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtNumeroAgencia" required="true" label="#{msg['funcionario.label.numero.agencia']}" style="width: 100px; margin-bottom: 5px; display: inline;" maxlength="10" value="#{manterFuncionarioMB.funcionarioCadastro.contaBancaria.numeroAgencia}" />
+		                </h:panelGroup>
+		                
+		                <h:panelGroup styleClass="formCell">
+		                	<h:panelGroup styleClass="formLabel">
+		                 		<h:outputLabel value="#{msg['funcionario.label.numero.conta']}" for="txtNumeroConta" style="font-weight:bold"/>
+		                    	<h:outputLabel value="*" for="txtNumeroConta" style="color: red; " />
+		                	</h:panelGroup>
+		                   	<p:inputText id="txtNumeroConta" required="true" label="#{msg['funcionario.label.numero.conta']}" style="width: 100px; margin-bottom: 5px; display: inline;" maxlength="10" value="#{manterFuncionarioMB.funcionarioCadastro.contaBancaria.numeroConta}" />
+		                </h:panelGroup>
+		                
+            		</h:panelGroup>
+            		
+                </p:panel>
+                
+            </p:panel>
+            
+            <h:panelGroup style="display: block; margin-top: 15px; text-align: center;">
+                <p:commandButton id="btnOk" title="#{msg['label.button.salvar']}" value="#{msg['label.button.salvar']}" ajax="false" icon="ui-icon-check" action="#{manterFuncionarioMB.cadastrar}" update="pnlCadastro"/>
+                <p:commandButton id="btnCancelar" title="#{msg['label.button.voltar']}" value="#{msg['label.button.voltar']}" ajax="false" icon="ui-icon-arrowreturnthick-1-w" action="#{manterFuncionarioMB.voltar}" immediate="true"  />
+            </h:panelGroup>
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

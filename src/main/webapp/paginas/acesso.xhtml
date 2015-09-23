@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+
+    <ui:define name="content">
+        <h:form acceptcharset="ISO-8859-1" prependId="false">
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['acesso.label.titulo']}" />
+            </div>
+            <br />
+            <div id="menu">
+                <p:panelMenu style="width:200px">
+                    <p:submenu label="#{msg['acesso.item.menu.cadastro']}">
+                    	<p:menuitem value="#{msg['acesso.item.menu.acessorio']}" action="#{manterAcessorioMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.banco']}" action="#{manterBancoMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.cliente']}" action="#{manterClienteMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.cor.vidro']}" action="#{manterCorVidroMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.funcao']}" action="#{manterFuncaoMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.funcionario']}" action="#{manterFuncionarioMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.perfil.vidro']}" action="#{manterPerfilVidroMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.tipo.vidro']}" action="#{manterTipoVidroMB.inicializar}" />
+                        <p:menuitem value="#{msg['acesso.item.menu.vidro']}" action="#{manterVidroMB.inicializar}" />
+                    </p:submenu>
+                    <p:separator />
+                    <p:submenu label="#{msg['acesso.item.menu.pedido']}">
+                    	<p:menuitem value="#{msg['acesso.item.menu.pedido.consultar']}" action="#{manterPedidoMB.inicializar}" />
+                    </p:submenu>
+                </p:panelMenu>  
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>  
+<!DOCTYPE HTML>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/paginas/template/template-principal.xhtml">
+
+    <ui:define name="content">
+        
+        <h:form acceptcharset="UTF-8" prependId="false">
+            
+            <div id="titulo">
+                <h:outputLabel id="lblTitulo" value="#{msg['vidro.label.titulo.cadastrar']}" />
+            </div>
+            
+            <br />
+            
+            <p:breadCrumb>  
+                <p:menuitem />
+                <p:menuitem value="#{msg['trilha.label.inicio']}" url="/paginas/acesso.xhtml" />
+            </p:breadCrumb>
+            
+            <br />
+            
+            <p:growl id="msg" showDetail="false" sticky="false" globalOnly="false" autoUpdate="true" />
+            
+            <p:panel id="pnlCadastro">
+            
+            	<h:panelGroup id="pnlDadosPrincipais" styleClass="formTable">
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['vidro.label.tipo.vidro']}" for="cbxTipoVidro" style="font-weight:bold;" />
+	                    	<h:outputLabel value="*" for="cbxTipoVidro" style="color: red" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxTipoVidro" style="width: 250px; height: 25px" label="#{msg['vidro.label.tipo.vidro']}" required="true" value="#{manterVidroMB.vidroCadastro.tipoVidro.id}">
+	                    	<f:selectItems value="#{manterVidroMB.listaTipoVidro}" var="tipoVidro" itemLabel="#{tipoVidro.descricao}" itemValue="#{tipoVidro.id}" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                    	<h:outputLabel value="#{msg['vidro.label.cor.vidro']}" for="cbxCorVidro" style="font-weight:bold;" />
+	                    	<h:outputLabel value="*" for="cbxCorVidro" style="color: red" />
+	                	</h:panelGroup>
+	                    <p:selectOneMenu id="cbxCorVidro" style="width: 250px; height: 25px" label="#{msg['vidro.label.cor.vidro']}" required="true" value="#{manterVidroMB.vidroCadastro.corVidro.id}">
+	                    	<f:selectItems value="#{manterVidroMB.listaCorVidro}" var="corVidro" itemLabel="#{corVidro.descricao}" itemValue="#{corVidro.id}" />
+						</p:selectOneMenu>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['vidro.label.milimetro']}" for="txtMilimetro" style="font-weight:bold"/>
+	                 		<h:outputLabel value="*" for="txtMilimetro" style="color: red" />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtMilimetro" label="#{msg['vidro.label.milimetro']}" style="width: 100px;" maxlength="2" required="true" value="#{manterVidroMB.vidroCadastro.milimetro}" onkeyup="somenteNumeros(this)" />
+	                </h:panelGroup>
+	                
+	                <h:panelGroup styleClass="formCell">
+	                	<h:panelGroup styleClass="formLabel">
+	                 		<h:outputLabel value="#{msg['vidro.label.valor.unitario']}" for="txtValorUnitario" style="font-weight:bold"/>
+	                 		<h:outputLabel value="*" for="txtValorUnitario" style="color: red" />
+	                	</h:panelGroup>
+	                   	<p:inputText id="txtValorUnitario" label="#{msg['vidro.label.valor.unitario']}" style="width: 150px;" maxlength="8" required="true" value="#{manterVidroMB.vidroCadastro.valorUnitario}" onkeypress="mascara(this, mascaraValorReais)">
+	                   		<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+	                   	</p:inputText>
+	                </h:panelGroup>
+	                
+                </h:panelGroup>
+           		
+            </p:panel>
+            
+            <h:panelGroup style="display: block; margin-top: 15px; text-align: center;">
+                <p:commandButton id="btnOk" title="#{msg['label.button.salvar']}" value="#{msg['label.button.salvar']}" ajax="false" icon="ui-icon-check" action="#{manterVidroMB.cadastrar}" update="pnlCadastro"/>
+                <p:commandButton id="btnCancelar" title="#{msg['label.button.voltar']}" value="#{msg['label.button.voltar']}" ajax="false" icon="ui-icon-arrowreturnthick-1-w" action="#{manterVidroMB.voltar}" immediate="true"  />
+            </h:panelGroup>
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

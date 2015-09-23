@@ -1,0 +1,166 @@
+/* 
+    Document   : estilo-paginas
+    Created on : 05/02/2014, 15:51:23
+    Author     : William
+    Description: Estilo visual das paginas internas do sistema Reiki.
+*/
+
+/* ################################# TAGS ################################### */
+
+body {
+    margin:0;
+    padding:0;
+    font-family:arial,sans-serif;
+    font-size:small;
+}
+
+/* ################################# IDS #################################### */
+
+div#container {
+    position:relative;
+    margin:0 auto;
+    width:1003px;
+    height:auto !important; /* real browsers */
+    height:100%; /* IE6: treaded as min-height*/
+    min-height:100%; /* real browsers */
+    border-left: 5px solid #293F66;
+    border-top: 5px solid #293F66;
+    border-right: 5px solid #293F66;
+}
+
+div#header {
+    position: relative;
+    padding: 0;
+    height: 50px;
+    background-color: #293F66;
+}
+
+div#logo {
+    float: left;
+    position: relative;
+    padding: 5px 0 0 17px;
+    text-align: left;
+}
+
+div#dadosSistema{
+    float: right;
+    position: relative;
+    text-align: right;
+    width: available;
+    margin-top: 25px;
+    margin-right: 15px;
+}
+
+div#content {
+    padding: 15px;
+    background-color: white;
+}
+
+div#footer {
+    width:1003px;
+    height: 18px;
+    bottom:0; /* stick to bottom */
+    text-align: center;
+    z-index: 0;
+    border-left: 5px solid #293F66;
+    border-top: 1px solid #293F66;
+    border-right: 5px solid #293F66;
+    border-bottom: 5px solid #293F66;
+    background: #293F66;
+    margin:0 auto;
+}
+
+div#titulo {
+    text-align: left;
+    border-bottom: 2px solid #293F66;
+}
+
+label#lblTitulo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #293F66;
+}
+
+/* ################################ CLASS ################################### */
+
+.copy {
+    font: 10px Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 4px;
+}
+
+.titulo {
+    -webkit-background-clip: border-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-size: auto;
+    -webkit-border-image: none;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgb(196, 196, 196);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
+    background-origin: padding-box;
+    background-size: auto;
+    border-bottom-color: rgb(168, 168, 168);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(168, 168, 168);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: rgb(168, 168, 168);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: rgb(168, 168, 168);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    color: rgb(51, 51, 51);
+    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 19px;
+    font-weight: normal;
+    height: 30px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    padding-bottom: 0px;
+    padding-left: 15px;
+    padding-right: 0px;
+    padding-top: 10px;
+    text-shadow: rgba(255, 255, 255, 0.701961) 0px 1px 0px;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.alignLeft {
+    text-align: left;
+}
+
+.ui-selectonemenu-label {
+	width: 100% !important;
+}
+
+.ui-panel {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.formTable {
+	display: table;
+}
+
+.formCell {
+	float: left;
+	margin-right: 15px;
+}
+
+.formLabel {
+	display: table;
+	margin-bottom: 5px;
+}
